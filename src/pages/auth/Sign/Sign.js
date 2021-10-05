@@ -73,18 +73,7 @@ const Sign = ({ navigation }) => {
         navigation.goBack();
     };
 
-    /*  if (error) {
-         Alert.alert('Dükkan', 'hata var!');
-     }
- 
-     if (data) {
-         if (data.status === 'Error') {
-             Alert.alert('Dükkan', data.msg);
-         }  
-     } */
-
-
-
+  
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.header}>Derdini Söyle ?</Text>

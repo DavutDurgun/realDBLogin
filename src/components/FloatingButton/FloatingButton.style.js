@@ -12,5 +12,17 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: colors.darkGreen,
+        borderColor: 'white',
+        borderWidth: 5,
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.30,
+        shadowRadius: 4.65,
+        
+        elevation: 8,
     }
 });
