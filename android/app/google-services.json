@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "48412744749",
+    "firebase_url": "https://mobilequrs1-default-rtdb.firebaseio.com",
+    "project_id": "mobilequrs1",
+    "storage_bucket": "mobilequrs1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48412744749:android:bdc7a7a2d3fcd613cceca4",
+        "android_client_info": {
+          "package_name": "com.firebasedd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48412744749-1s1vkv7is32nn058tiqrq74le7t6md1c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCX9FV5tMzIy7CluOj7jFBaY-ZYYZFIRG4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "48412744749-1s1vkv7is32nn058tiqrq74le7t6md1c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48412744749:android:38b1557acdb6df35cceca4",
+        "android_client_info": {
+          "package_name": "com.realdblogin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48412744749-1s1vkv7is32nn058tiqrq74le7t6md1c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCX9FV5tMzIy7CluOj7jFBaY-ZYYZFIRG4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "48412744749-1s1vkv7is32nn058tiqrq74le7t6md1c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

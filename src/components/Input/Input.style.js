@@ -8,12 +8,12 @@ export default StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: '#2b2b2b22',
         paddingHorizontal: 10
     },
     text: {
         flex: 1,
-        borderRadius: 5,
+        padding:3,
     }, 
     error: {
         color: '#FF214E',

@@ -1,23 +1,31 @@
-//https://fakestoreapi.com/auth/login
-import React from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView, View, Text, Image, Alert } from 'react-native';
 import { Formik, Form } from 'formik';//form işlemleri için
 import * as Yup from 'yup';//validate işlemleri için
+import auth from '@react-native-firebase/auth'; //db işlemleri
+import { showMessage } from "react-native-flash-message";//toast message
 
 //style
 import styles from './Login.style';
 
 //components
-import Input from '../../components/Input';
-import Button from '../../components/Button';
+import Input from '../../../components/Input';
+import Button from '../../../components/Button';
+
+
+//error
+import authErrorMessageParser from '../../../utils/authErrorMessageParser';
 
 
 
-const Login = () => {
+const Login = ({ navigation }) => {
+    const [loading, setLoading] = useState(false);
+
     const validationSchema = Yup.object().shape({
-        username: Yup.string()
+        usermail: Yup.string()
             .min(2, 'En az 2 karakter olmalı!')
             .max(50, 'En fazla 50 karakter olmalı!')
+            .email(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'e posta adresi yanlış')
             .required('Zorunlu!'),
         password: Yup.string()
             .min(8, 'En az 8 karakter olmalı!')
@@ -28,9 +36,38 @@ const Login = () => {
             .required('Zorunlu!'),
     });
 
-    const handleLogin = (forms) => {
+    const handleFormSubmit = async (form) => {
+        try {
+            setLoading(true);
+            await auth()
+                .signInWithEmailAndPassword(
+                    form.usermail,
+                    form.password
+                )
+                .then(res => { console.log(res) })
+                .catch(err => { console.log(err) });
 
+            showMessage({
+                message: "Giriş yapıldı!",
+                type: "success",
 
+            });
+            navigation.navigate("MessagesPage");
+            
+        } catch (error) {
+            showMessage({
+                message: authErrorMessageParser(error.code),
+                type: "danger",
+
+            });
+
+        }
+        setLoading(false);
+
+    };
+
+    const handleSignUp = () => {
+        navigation.navigate("SignPage");
     };
 
     /*  if (error) {
@@ -47,17 +84,15 @@ const Login = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.logo_container}>
-                <Text style={styles.text_logo}>DÜKKAN</Text>
-                <Image style={styles.logo} source={require('../../assets/login_logo.png')} />
-            </View>
+            <Text style={styles.header}>Derdini Söyle ?</Text>
 
             <Formik
+                style={styles.form}
                 initialValues={{
-                    username: '',
+                    usermail: '',
                     password: '',
                 }}
-                onSubmit={handleLogin}
+                onSubmit={handleFormSubmit}
             //validationSchema={validationSchema}
             >
                 {({
@@ -68,10 +103,10 @@ const Login = () => {
                 }) => (
                     <View style={styles.body_container}>
                         <Input
-                            placeholder='Kullanıcı adını giriniz..'
-                            value={values.username}
-                            onChangeText={handleChange('username')}
-                            errors={errors.username}
+                            placeholder='Kullanıcı e-postanızı giriniz..'
+                            value={values.usermail}
+                            onChangeText={handleChange('usermail')}
+                            errors={errors.usermail}
                             iconName='account'
                         />
                         <Input
@@ -85,40 +120,24 @@ const Login = () => {
                         <Button
                             text='Giriş Yap'
                             onPress={handleSubmit}
-                        //loading={loading}
+                            theme="primary"
+                            loading={loading}
                         />
                     </View>
 
                 )}
             </Formik>
+
+            <Button
+                text='Kayıt Ol'
+                onPress={handleSignUp}
+                theme="secondary"
+            //loading={loading}
+            />
+
         </SafeAreaView>
     );
 }
 
 
 export default Login;
-
-
-
-const user = {
-    "address": {
-        "geolocation": {
-            "lat": "-37.3159",
-            "long": "81.1496"
-        },
-        "city": "kilcoole",
-        "street": "new road",
-        "number": 7682,
-        "zipcode": "12926-3874"
-    },
-    "id": 1,
-    "email": "john@gmail.com",
-    "username": "johnd",
-    "password": "m38rmF$",
-    "name": {
-        "firstname": "john",
-        "lastname": "doe"
-    },
-    "phone": "1-570-236-7033",
-    __v: 0
-}
